@@ -1,8 +1,6 @@
 "use client"
 import styles from "./screen.module.css";
 import TextInput from "../textInput/TextInput";
-import { useState } from "react";
-import { ScreenType } from "@/types/ScreenType";
 
 export default function UpdateScreen({
     number,
