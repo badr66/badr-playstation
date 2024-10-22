@@ -42,7 +42,7 @@ export default function Screen({num}: {num: number}) {
             <div className={styles.buttons}>
                     <CustomerButton title={start?"إيقــاف":"بــدء"} bg={start?"gray":"green"} color="white" start={start} setStart={setStart}/>
                     {
-                        seconds !== 0 && <CustomerButton title="إلغـــاء" bg="red" color="white" start={start} setStart={setStart} seconds={seconds} setSeconds={setSeconds}/>
+                        seconds !== 0 && <CustomerButton title="إلغـــاء" bg="red" color="white" start={start} setStart={setStart} setSeconds={setSeconds}/>
                     }
             </div>
         </div>

@@ -6,7 +6,6 @@ export default function CustomerButton({
     color,
     start,
     setStart,
-    seconds,
     setSeconds,
 }: {
     title: string;
@@ -14,7 +13,6 @@ export default function CustomerButton({
     color: string;
     start: boolean;
     setStart: (start: boolean) => void;
-    seconds?: number;
     setSeconds?: (seconds: number) => void
 }) {
     const clickHandle = () => {
