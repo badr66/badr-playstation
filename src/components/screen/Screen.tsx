@@ -4,7 +4,7 @@ import styles from "./screen.module.css";
 import CustomerButton from "../button/CustomerButton";
 import { useEffect, useState } from "react";
 
-export default function Screen({num, name}: {num: number, name?: string}) {
+export default function Screen({num, name}: {num: string, name?: string}) {
     const [start, setStart] = useState<boolean>(false);
     const [seconds, setSeconds] = useState<number>(0);
     useEffect(() => {

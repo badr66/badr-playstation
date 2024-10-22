@@ -1,5 +1,5 @@
 export type ScreenType = {
     id: number;
-    number: number;
+    number: string;
     name: string;
 }
