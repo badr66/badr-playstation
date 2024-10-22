@@ -31,7 +31,7 @@
 .cost {
     font-size: 1.2rem;
     font-weight: bolder;
-    color: rgb(3, 72, 75);
+    color: rgb(5, 92, 12);
 }
 .buttons {
     display: flex;
@@ -85,4 +85,7 @@
 .hide {
     opacity: 0;
     pointer-events: none;
+}
+.deleteConfirm {
+    color: rgb(214, 10, 10);
 }
