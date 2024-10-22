@@ -4,7 +4,7 @@ import styles from "./screen.module.css";
 import CustomerButton from "../button/CustomerButton";
 import { useEffect, useState } from "react";
 
-export default function Screen({num}: {num: number}) {
+export default function Screen({num, name}: {num: number, name?: string}) {
     const [start, setStart] = useState<boolean>(false);
     const [seconds, setSeconds] = useState<number>(0);
     useEffect(() => {
@@ -31,7 +31,7 @@ export default function Screen({num}: {num: number}) {
 };
     return(
         <div className={styles.screen}>
-            <p className={styles.screenDetail}>{`شـــاشـــــة رقـــم (${num})`}</p>
+            <p className={styles.screenDetail}>{`${name && name !== null ? name : "شاشــــة رقــم"}(${num})`}</p>
             <div className={styles.screenImg}>
                 <Image src="/images/control/screen.ico" alt="شاشة" width={300} height={300} />
                 <div className={styles.timer}>

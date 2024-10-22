@@ -1,12 +1,18 @@
 import Screen from "@/components/screen/Screen";
 import styles from "./page.module.css";
+import { getScreens } from "@/databaseFunctions/screens/getScreens";
 
-export default function Home() {
+export default async function Home() {
+  const fetchScreens = await getScreens();
   return (
     <div className={styles.page}>
-      <Screen num={1} />
-      <Screen num={2} />
-      <Screen num={3} />
+      {
+        fetchScreens.map((screen) => {
+          return(
+            <Screen key={screen.id} num={screen.number} name={screen.name}/>
+          );
+        })
+      }
     </div>
   );
 }
