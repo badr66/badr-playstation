@@ -10,7 +10,6 @@
   .page {
     flex-direction: column;
     gap: 2rem;
-    position: relative;
   }
   
 }
