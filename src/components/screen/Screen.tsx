@@ -7,8 +7,11 @@ import { deleteScreen } from "@/databaseFunctions/screens/deleteScreen";
 import { useRouter } from "next/navigation";
 import TimedNotification from "../TimedNotification/TimedNotification";
 import Modal from "../modal/Modal";
+import { ScreenType } from "@/types/ScreenType";
+import UpdateScreen from "./UpdateScreen";
+import { updateScreen } from "@/databaseFunctions/screens/updateScreen";
 
-export default function Screen({id, num, cost, name}: {id: number, num: string, cost: number, name?: string}) {
+export default function Screen({screen}: {screen: ScreenType}) {
     const router = useRouter();
     const [start, setStart] = useState<boolean>(false);
     const [seconds, setSeconds] = useState<number>(0);
@@ -16,9 +19,19 @@ export default function Screen({id, num, cost, name}: {id: number, num: string, 
     const [error, setError] = useState<string>("");
     const [message, setMessage] = useState<string>("");
     const [visible, setVisible] = useState<boolean>(false);
-    const deleteModalBody = <div>
-        <h2 className={styles.deleteConfirm}>هل تريد بالتأكيد حذف الشاشــة ذات الرقــم: {num}</h2>
-    </div>
+    const [action, setAction] = useState<string>("");
+    const [number, setNumber] = useState<string>(screen.number);
+    const [name, setName] = useState<string>(screen.name);
+    const [cost, setCost] = useState<string>(String(screen.cost));
+    const modalBody = action === "delete" ? <div>
+        <h2 className={styles.deleteConfirm}>هل تريد بالتأكيد حذف الشاشــة ذات الرقــم: {screen.number}</h2>
+    </div> : <UpdateScreen
+    number={number}
+    name={name}
+    cost={cost} 
+    setNumber={setNumber} 
+    setName={setName} 
+    setCost={setCost}/>
     useEffect(() => {
         let interval = null;
         if(start){
@@ -38,13 +51,18 @@ export default function Screen({id, num, cost, name}: {id: number, num: string, 
     const formattedTime = new Date(seconds *1000).toISOString().slice(11,19);
     const calculateCost = () => {
         const hours = seconds /3600;
-        return (hours * cost).toFixed(2);
+        return (hours * screen.cost).toFixed(2);
     };
     const deleteClicked = () => {
+        setAction("delete");
+        setVisible(true);
+    }
+    const updateClicked = () => {
+        setAction("update");
         setVisible(true);
     }
     const deleteHandle = async () => {
-        const callApi = await deleteScreen(String(id));
+        const callApi = await deleteScreen(String(screen.id));
         if(callApi.error) {
             setError(callApi.error);
             setMessage("");
@@ -57,10 +75,36 @@ export default function Screen({id, num, cost, name}: {id: number, num: string, 
         }
 
     }
+    const updateHandle = async() => {
+        const body = {
+            number,
+            name,
+            cost: parseInt(cost),
+        };
+        if(!body.cost) {
+            setError("الرجــاء إدخال قيمــة للتكلفــة");
+        }
+        else {
+            const callApi = await updateScreen(body, String(screen.id));
+            if(callApi.error) {
+                setVisible(false);
+                setMessage("");
+                setError(callApi.error);
+            }
+            else if(callApi.message) {
+                setVisible(false);
+                setError("");
+                setMessage(callApi.message);
+                router.refresh();
+
+            }
+        }
+    }
+    const onOk = action === "delete" ? deleteHandle : updateHandle;
     return(
         <>
                 <div className={styles.screen}>
-            <p className={styles.screenDetail}>{`${name && name !== null ? name : "شاشــــة رقــم"}(${num})`}</p>
+            <p className={styles.screenDetail}>{`${screen.name && screen.name !== null ? screen.name : "شاشــــة رقــم"}(${screen.number})`}</p>
             <div className={styles.screenImg}>
                 <Image src="/images/control/screen.ico" alt="شاشة" width={300} height={300} />
                 <div className={styles.timer}>
@@ -84,11 +128,16 @@ export default function Screen({id, num, cost, name}: {id: number, num: string, 
                 <Image src="/images/control/screenCtrl.ico" alt="خيارات" width={40} height={40} />
             </div>
             <div className={`${styles.options} ${showOptions ? styles.show : styles.hide}`}>
-                <div>تحريـر</div>
+                <div onClick={updateClicked}>تحريـر</div>
                 <div onClick={deleteClicked}>حـــذف</div>
             </div>
         </div>
-        <Modal title="حــذف شاشـــة" visible={visible} closed={setVisible} modalBody={deleteModalBody} onOk={deleteHandle} headerBg="rgb(240, 146, 146)" />
+        <Modal title={action === "delete" ? "حــذف شاشـــة" : "تعديل بيانات الشاشة"} 
+        visible={visible} 
+        closed={setVisible} 
+        modalBody={modalBody} 
+        onOk={onOk} 
+        headerBg={action === "delete" ? "rgb(240, 146, 146)" : "cyan"} />
         </>
     );
 }

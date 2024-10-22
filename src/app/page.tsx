@@ -9,7 +9,7 @@ export default async function Home() {
       {
         fetchScreens.map((screen) => {
           return(
-            <Screen key={screen.id} id={screen.id} num={screen.number} cost={screen.cost} name={screen.name}/>
+            <Screen key={screen.id} screen={screen}/>
           );
         })
       }
