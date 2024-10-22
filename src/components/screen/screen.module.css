@@ -1,0 +1,40 @@
+.screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+.screenDetail {
+    font-size: 1.4rem;
+    font-weight: bolder;
+    color: rgb(95, 63, 5);
+}
+.screenImg {
+    position: relative;
+}
+.timer {
+    position: absolute;
+    content: "";
+    top:30%;
+    left: 33%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+.time {
+    font-size: 1.1rem;
+    color: rgb(35, 122, 122);
+}
+.cost {
+    font-size: 1.2rem;
+    font-weight: bolder;
+    color: rgb(3, 72, 75);
+}
+.buttons {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    gap: 1rem;
+}

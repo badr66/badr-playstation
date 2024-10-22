@@ -1,0 +1,15 @@
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+}
+@media screen and ( max-width: 767px) {
+  .page {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+}

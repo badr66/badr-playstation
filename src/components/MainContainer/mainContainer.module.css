@@ -1,0 +1,107 @@
+.mainContainer {
+    padding: 0.5rem 1rem;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(47, 204, 231);
+    padding: 0.5rem;
+}
+.toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1.6rem;
+    cursor: pointer;
+}
+.toggle span {
+    width: 2rem;
+    height: 0.2rem;
+    background-color: rgb(241, 68, 5);
+    position: relative;
+}
+.toggle span::after, .toggle span::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: rgb(241, 68, 5);
+    left: 0;
+    transition: all 0.5s linear;
+}
+.toggle span::after {
+    top: 0.5rem;
+}
+.toggle span::before {
+    top: -0.5rem;
+}
+
+
+
+
+
+.toggleClicked span {
+    visibility: hidden;
+}
+.toggleClicked span::after, .toggleClicked span::before {
+    visibility: visible;
+    top: 0;
+    left: 0;
+}
+.toggleClicked span::after {
+    transform: rotate(45deg);
+}
+.toggleClicked span::before {
+    transform: rotate(-45deg);
+}
+.navbar {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.navbar h2 {
+    color: rgb(117, 34, 4);
+}
+.content {
+    display: grid;
+    grid-template-columns: 0fr 1fr;
+    transition: all 0.5s linear;
+}
+.toggleContent {
+    grid-template-columns: 1fr 3fr;
+}
+.sidebar {
+    min-height: 100vh;
+    background-color: rgb(47, 204, 231);
+    border-top: 0.1rem solid rgb(241, 68, 5);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+}
+.sidebarHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    background-color: rgb(65, 199, 116);
+}
+.sidebarHeader p {
+    color: rgb(255, 255, 255);
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+.mainContent {
+    overflow: hidden;
+}
+@media screen and ( max-width: 767px) {
+    .toggleContent {
+        grid-template-columns: 1fr 0fr;
+    }
+}
