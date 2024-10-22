@@ -14,3 +14,29 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({error: "حدث خطأ ما! يرجى إعادة المحاولة"})
     }
 }
+export async function POST(request: NextRequest) {
+    try {
+        const {number, name} = await request.json();
+        if(name === "") {
+            const addQuery = await sql `
+            INSERT INTO screens (number, name) VALUES (${number}, null) RETURNING id
+            `;
+            if(addQuery.rows.length > 0) {
+                return NextResponse.json({message: "تم إضافة شاشة جديدة بنجاح"});
+            }
+            else return NextResponse.json({error: "حدث خطأ أثناء الإضافة! حاول مجددا"});
+        }
+        else {
+            const addQuery = await sql `
+            INSERT INTO screens (number, name) VALUES (${number}, ${name}) RETURNING id
+            `;
+            if(addQuery.rows.length > 0) {
+                return NextResponse.json({message: "تم إضافة شاشة جديدة بنجاح"});
+            }
+            else return NextResponse.json({error: "حدث خطأ أثناء الإضافة! حاول مجددا"});
+        }
+    } catch(error) {
+        console.log(error);
+        return NextResponse.json({error: "فشل في إضافة شاشة جديدة"});
+    }
+}

@@ -38,3 +38,19 @@
     flex: 1;
     gap: 1rem;
 }
+.addScreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+.addScreen p {
+    font-size: 1.1rem;
+    font-weight: bolder;
+}
+.modalBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
