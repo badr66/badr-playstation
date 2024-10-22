@@ -1,4 +1,4 @@
-export async function addNewScreen(body: {number: string, name: string}) {
+export async function addNewScreen(body: {number: string, name: string, cost: number}) {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
     type ApiResponse = {
         message?: string;

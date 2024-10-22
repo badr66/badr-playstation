@@ -4,7 +4,7 @@ import styles from "./screen.module.css";
 import CustomerButton from "../button/CustomerButton";
 import { useEffect, useState } from "react";
 
-export default function Screen({num, name}: {num: string, name?: string}) {
+export default function Screen({num, cost, name}: {num: string, cost: number, name?: string}) {
     const [start, setStart] = useState<boolean>(false);
     const [seconds, setSeconds] = useState<number>(0);
     useEffect(() => {
@@ -24,10 +24,9 @@ export default function Screen({num, name}: {num: string, name?: string}) {
         };
     }, [start, seconds]);
     const formattedTime = new Date(seconds *1000).toISOString().slice(11,19);
-    const pricePerHour = 3000;
     const calculateCost = () => {
         const hours = seconds /3600;
-        return (hours * pricePerHour).toFixed(2);
+        return (hours * cost).toFixed(2);
 };
     return(
         <div className={styles.screen}>

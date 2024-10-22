@@ -16,10 +16,10 @@ export async function GET(request: NextRequest) {
 }
 export async function POST(request: NextRequest) {
     try {
-        const {number, name} = await request.json();
+        const {number, name, cost} = await request.json();
         if(name === "") {
             const addQuery = await sql `
-            INSERT INTO screens (number, name) VALUES (${number}, null) RETURNING id
+            INSERT INTO screens (number, name, cost) VALUES (${number}, null, ${cost}) RETURNING id
             `;
             if(addQuery.rows.length > 0) {
                 return NextResponse.json({message: "تم إضافة شاشة جديدة بنجاح"});
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
         }
         else {
             const addQuery = await sql `
-            INSERT INTO screens (number, name) VALUES (${number}, ${name}) RETURNING id
+            INSERT INTO screens (number, name, cost) VALUES (${number}, ${name}, ${cost}) RETURNING id
             `;
             if(addQuery.rows.length > 0) {
                 return NextResponse.json({message: "تم إضافة شاشة جديدة بنجاح"});
