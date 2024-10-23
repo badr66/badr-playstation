@@ -23,7 +23,7 @@ export default function Logout() {
             setLoading(false);
             setUser(null);
             localStorage.removeItem("user");
-            router.push("/");
+            router.push("/login");
         }
     }
     return(
