@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./mainContainer.module.css";
 import AddScreen from "../screen/AddScreen";
+import Logout from "../logout/Logout";
 
 export default function Sidebar() {
     return(
@@ -10,6 +11,7 @@ export default function Sidebar() {
                 <Image src="/images/control/control.ico" alt="التحكم" width={30} height={30} />
             </div>
             <AddScreen />
+            <Logout />
         </div>
     );
 }
