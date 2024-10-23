@@ -10,9 +10,11 @@ import Modal from "../modal/Modal";
 import { ScreenType } from "@/types/ScreenType";
 import UpdateScreen from "./UpdateScreen";
 import { updateScreen } from "@/databaseFunctions/screens/updateScreen";
+import { useUser } from "@/context/userContext";
 
 export default function Screen({screen}: {screen: ScreenType}) {
     const router = useRouter();
+    const {user} = useUser();
     const [start, setStart] = useState<boolean>(false);
     const [seconds, setSeconds] = useState<number>(0);
     const [showOptions, setShowOptions] = useState<boolean>(false);
@@ -118,15 +120,21 @@ export default function Screen({screen}: {screen: ScreenType}) {
                 message !== "" && <TimedNotification bg="rgba(0,0,0,0.3)" color="green" duration={5000} notification={message} />
             }
             </div>
-            <div className={styles.buttons}>
+            {
+                user && 
+                <div className={styles.buttons}>
                     <CustomerButton title={start?"إيقـاف مؤقـت":"بــدء"} bg={start?"gray":"green"} color="white" start={start} setStart={setStart}/>
                     {
                         seconds !== 0 && <CustomerButton title="إلغـــاء" bg="red" color="white" start={start} setStart={setStart} setSeconds={setSeconds}/>
                     }
-            </div>
-            <div className={styles.screenCtrl} onClick={()=>{setShowOptions(!showOptions)}}>
-                <Image src="/images/control/screenCtrl.ico" alt="خيارات" width={40} height={40} />
-            </div>
+               </div>
+            }
+            {
+                user && 
+                <div className={styles.screenCtrl} onClick={()=>{setShowOptions(!showOptions)}}>
+                    <Image src="/images/control/screenCtrl.ico" alt="خيارات" width={40} height={40} />
+                </div>
+            }
             <div className={`${styles.options} ${showOptions ? styles.show : styles.hide}`}>
                 <div onClick={updateClicked}>تحريـر</div>
                 <div onClick={deleteClicked}>حـــذف</div>

@@ -1,5 +1,5 @@
 type ApiResponse = {
-    name?: string;
+    info?: {id: number, name: string, password: string};
     error?: string;
 }
 export async function checkUser(name: string, password: string) {
