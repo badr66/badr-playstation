@@ -57,20 +57,24 @@
 }
 .navbar {
     display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+}
+.brand {
+    display: flex;
     margin-left: auto;
     margin-right: auto;
-    flex: 1;
     justify-content: center;
     align-items: center;
     gap: 1rem;
 }
-.navbar h2 {
+.brand h2 {
     color: rgb(117, 34, 4);
 }
 .name {
-    margin-right: auto;
     font-size: 1.2rem;
-    color: rgb(60, 255, 0);
+    color: rgb(218, 42, 150);
     font-weight: bolder;
 }
 .content {

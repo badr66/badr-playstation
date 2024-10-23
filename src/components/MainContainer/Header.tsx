@@ -7,8 +7,10 @@ export default function Header() {
     const {user} = useUser();
     return(
         <div className={styles.navbar}>
-            <Image src="/images/header/logo.ico" alt="بلاي ستيشن" width={50} height={50} />
-            <h2>بلاي ستيشن بدر</h2>
+            <div className={styles.brand}>
+                <Image src="/images/header/logo.ico" alt="بلاي ستيشن" width={50} height={50} />
+                <h2>بلاي ستيشن بدر</h2>
+            </div>
             {user && <p className={styles.name}>{`مـرحبــاً ${user.name}`}</p>}
         </div>
     );
