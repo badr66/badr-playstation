@@ -5,6 +5,7 @@ import { useUser } from "@/context/userContext";
 import { logout } from "@/databaseFunctions/users/logout";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import TimedNotification from "../TimedNotification/TimedNotification";
 
 export default function Logout() {
     const {user} = useUser();
@@ -32,7 +33,9 @@ export default function Logout() {
                 <Image src="/images/logout/logout.ico" alt="" width={20} height={20} />
             </div>
         }
-
+        {
+            error !== "" && <TimedNotification bg="rgba(0,0,0,0.3)" color="red" duration={5000} notification={error} />
+        }
         </>
     );
 }
