@@ -7,8 +7,10 @@ import Modal from "../modal/Modal";
 import { addNewScreen } from "@/databaseFunctions/screens/addNewScreen";
 import { useRouter } from "next/navigation";
 import TimedNotification from "../TimedNotification/TimedNotification";
+import { useUser } from "@/context/userContext";
 
 export default function AddScreen() {
+    const {user} = useUser();
     const [visible, setVisible] = useState<boolean>(false);
     const [number, setNumber] = useState<string>("");
     const [name, setName] = useState<string>("");
@@ -48,23 +50,29 @@ export default function AddScreen() {
     }
     return(
         <>  
+        {
+            user && (
+                <>
             <div className={styles.addScreen} onClick={()=>{setVisible(true)}}>
-                <p>إضافة شاشة جديدة</p>
-                <Image src="/images/control/screen.ico" alt="إضافة شاشة" width={20} height={20} />
-            </div>
-            <Modal 
-            closed={setVisible} 
-            title="إضافة شاشة جديدة" 
-            visible={visible} 
-            modalBody={modalBody} 
-            onOk={onOk}
-            headerBg="cyan"/>
-            {
-                error !== "" && <TimedNotification bg="rgba(0,0,0,0.3)" color="red" duration={5000} notification={error} />
-            }
-            {
-                message !== "" && <TimedNotification bg="rgba(0,0,0,0.3)" color="green" duration={5000} notification={message} />
-            }
+            <p>إضافة شاشة جديدة</p>
+            <Image src="/images/control/screen.ico" alt="إضافة شاشة" width={20} height={20} />
+        </div>
+        <Modal 
+        closed={setVisible} 
+        title="إضافة شاشة جديدة" 
+        visible={visible} 
+        modalBody={modalBody} 
+        onOk={onOk}
+        headerBg="cyan"/>
+        {
+            error !== "" && <TimedNotification bg="rgba(0,0,0,0.3)" color="red" duration={5000} notification={error} />
+        }
+        {
+            message !== "" && <TimedNotification bg="rgba(0,0,0,0.3)" color="green" duration={5000} notification={message} />
+        }
+        </>
+    )
+        }
         </>
 
     );
