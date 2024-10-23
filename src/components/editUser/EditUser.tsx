@@ -36,10 +36,10 @@ export default function EditUser() {
                     setVisible(false);
                     setError(callApi.error);
                 }
-                else if(callApi.newAccount) {
+                else {
                     setVisible(false);
                     setError("");
-                    setUser(callApi.newAccount)
+                    setUser({id:  callApi.id, name: callApi.name, password: callApi.password});
                     router.refresh();
     
                 }

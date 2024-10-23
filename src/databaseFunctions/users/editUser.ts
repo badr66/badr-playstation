@@ -2,10 +2,6 @@ import { UserType } from "@/types/UserType";
 
 export async function editUser(body: {name: string, password: string, id: number}) {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-    type ApiResponse = {
-        newAccount?: UserType;
-        error?: string;
-    }
     try {
         const callApi = await fetch(`${baseUrl}/api/users/${String(body.id)}`,
             {
@@ -17,7 +13,7 @@ export async function editUser(body: {name: string, password: string, id: number
             throw new Error("خطأ بالاتصال بالخادم");
         }
         else {
-            const response: ApiResponse = await callApi.json();
+            const response = await callApi.json();
             return response;
         }
     } catch(error) {
