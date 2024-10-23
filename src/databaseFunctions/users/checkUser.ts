@@ -1,7 +1,4 @@
-type ApiResponse = {
-    info?: {id: number, name: string, password: string};
-    error?: string;
-}
+
 export async function checkUser(name: string, password: string) {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
     try {
@@ -13,7 +10,7 @@ export async function checkUser(name: string, password: string) {
             throw new Error("خطأ بالاتصال بالخادم");
         }
         else {
-            const response: ApiResponse = await callApi.json();
+            const response = await callApi.json();
             return response;
         }
     } catch(error) {
