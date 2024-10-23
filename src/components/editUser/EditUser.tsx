@@ -12,8 +12,8 @@ import { editUser } from "@/databaseFunctions/users/editUser";
 export default function EditUser() {
     const {user, setUser} = useUser();
     const [visible, setVisible] = useState<boolean>(false);
-    const [name, setName] = useState<string>(user?.name ? user.name : "");
-    const [password, setPassword] = useState<string>(user?.password ? user.password : "");
+    const [name, setName] = useState<string>(user ? user.name : "");
+    const [password, setPassword] = useState<string>(user ? user.password : "");
     const [error, setError] = useState<string>("");
     const router = useRouter();
     const modalBody = <div className={styles.modalBody}>
@@ -21,7 +21,7 @@ export default function EditUser() {
         <TextInput placeholder="كلمـــة الـمرور" setValue={setPassword} type="text" value={password} />
     </div>
     const onOk = async() => {
-        if(user?.id) {
+        if(user) {
             const body = {
                 name,
                 password,
