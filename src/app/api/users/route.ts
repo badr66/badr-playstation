@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
                 secure: process.env.NODE_ENV === "development",
                 path: "/",
             });
-            return NextResponse.json({id: checkUserQuery.rows[0].id, name: checkUserQuery.rows[0].name, password: checkUserQuery.rows[0].password});
+            return NextResponse.json({id: checkUserQuery.rows[0].id, name: name, password: password});
         }
         else return NextResponse.json({error: "خطأ فـي الاسم أو كلمــة المرور!"})
     } catch(error) {
