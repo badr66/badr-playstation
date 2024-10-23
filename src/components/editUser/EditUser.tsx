@@ -1,5 +1,5 @@
 "use client"
-import styles from "./screen.module.css";
+import styles from "./editUser.module.css";
 import TextInput from "../textInput/TextInput";
 import { useState } from "react";
 import Image from "next/image";
