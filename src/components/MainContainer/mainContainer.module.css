@@ -92,6 +92,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    gap: 2rem;
     white-space: nowrap;
 }
 .sidebarHeader {

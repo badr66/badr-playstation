@@ -8,7 +8,7 @@ import { useState } from "react";
 import TimedNotification from "../TimedNotification/TimedNotification";
 
 export default function Logout() {
-    const {user} = useUser();
+    const {user, setUser} = useUser();
     const router = useRouter();
     const [error, setError] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
@@ -21,6 +21,8 @@ export default function Logout() {
         }
         else {
             setLoading(false);
+            setUser(null);
+            localStorage.removeItem("user");
             router.push("/");
         }
     }

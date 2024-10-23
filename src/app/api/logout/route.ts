@@ -1,16 +1,12 @@
-import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
 
-export async function POST(request: NextRequest) {
-    const cookies = request.cookies;
-    const token = cookies.get("token");
+export async function POST() {
+    const cookiesStore = cookies();
+    const token = cookiesStore.get("token");
     if(token) {
-        const deleteCookies = cookies.delete(token.name);
-        if(deleteCookies) {
-            return NextResponse.json({message: "تم تسجيل الخروج بنجــاح"});
-        }
-        else {
-            return NextResponse.json({error: "فشل تسجيل الخروج! حاول مجددا"});
-        }
+        const deleteCookies = cookiesStore.delete("token");
+        return NextResponse.json({message: "تم تسجيل الخروج بنجــاح"});
     }
     else {
         return NextResponse.json({error: "عمليــة خاطئــة"});
