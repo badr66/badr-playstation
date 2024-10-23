@@ -1,5 +1,3 @@
-import { UserType } from "@/types/UserType";
-
 export async function editUser(body: {name: string, password: string, id: number}) {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
     try {
