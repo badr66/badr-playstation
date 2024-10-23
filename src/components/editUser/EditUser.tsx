@@ -12,37 +12,37 @@ import { editUser } from "@/databaseFunctions/users/editUser";
 export default function EditUser() {
     const {user, setUser} = useUser();
     const [visible, setVisible] = useState<boolean>(false);
-    const [name, setName] = useState<string>(user?.name!);
-    const [password, setPassword] = useState<string>(user?.password!);
+    const [name, setName] = useState<string>(user?.name ? user.name : "");
+    const [password, setPassword] = useState<string>(user?.password ? user.password : "");
     const [error, setError] = useState<string>("");
-    const [message, setMessage] = useState<string>("");
     const router = useRouter();
     const modalBody = <div className={styles.modalBody}>
         <TextInput placeholder="الاســــم" setValue={setName} type="text" />
         <TextInput placeholder="كلمـــة الـمرور" setValue={setPassword} type="text" />
     </div>
     const onOk = async() => {
-        const body = {
-            id: user?.id!,
-            name,
-            password
-        };
-        if(name === "" || password === "") {
-            setError("الرجــاء إدخال الاســم وكلمة المرور");
-        }
-        else {
-            const callApi = await editUser(body);
-            if(callApi.error) {
-                setVisible(false);
-                setMessage("");
-                setError(callApi.error);
+        if(user?.id) {
+            const body = {
+                name,
+                password,
+                id: user.id,
+            };
+            if(name === "" || password === "") {
+                setError("الرجــاء إدخال الاســم وكلمة المرور");
             }
-            else if(callApi.newAccount) {
-                setVisible(false);
-                setError("");
-                setUser(callApi.newAccount)
-                router.refresh();
-
+            else {
+                const callApi = await editUser(body);
+                if(callApi.error) {
+                    setVisible(false);
+                    setError(callApi.error);
+                }
+                else if(callApi.newAccount) {
+                    setVisible(false);
+                    setError("");
+                    setUser(callApi.newAccount)
+                    router.refresh();
+    
+                }
             }
         }
     }
