@@ -5,7 +5,7 @@ export async function POST() {
     const cookiesStore = cookies();
     const token = cookiesStore.get("token");
     if(token) {
-        const deleteCookies = cookiesStore.delete("token");
+        cookiesStore.delete("token");
         return NextResponse.json({message: "تم تسجيل الخروج بنجــاح"});
     }
     else {
