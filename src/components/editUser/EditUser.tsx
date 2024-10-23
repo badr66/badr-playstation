@@ -17,8 +17,8 @@ export default function EditUser() {
     const [error, setError] = useState<string>("");
     const router = useRouter();
     const modalBody = <div className={styles.modalBody}>
-        <TextInput placeholder="الاســــم" setValue={setName} type="text" />
-        <TextInput placeholder="كلمـــة الـمرور" setValue={setPassword} type="text" />
+        <TextInput placeholder="الاســــم" setValue={setName} type="text" value={name} />
+        <TextInput placeholder="كلمـــة الـمرور" setValue={setPassword} type="text" value={password} />
     </div>
     const onOk = async() => {
         if(user?.id) {
