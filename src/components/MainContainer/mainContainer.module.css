@@ -67,6 +67,12 @@
 .navbar h2 {
     color: rgb(117, 34, 4);
 }
+.name {
+    margin-right: auto;
+    font-size: 1.2rem;
+    color: rgb(60, 255, 0);
+    font-weight: bolder;
+}
 .content {
     display: grid;
     grid-template-columns: 0fr 1fr;

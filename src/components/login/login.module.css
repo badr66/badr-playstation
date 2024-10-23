@@ -40,6 +40,10 @@
     background-color: black;
     color: rgb(255, 255, 255);
 }
+.error {
+    color: rgb(224, 14, 14);
+    font-size: 1.1rem;
+}
 @media screen and ( max-width: 767px) {
     .login {
         flex: 0.8;
