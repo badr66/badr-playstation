@@ -14,3 +14,10 @@
     flex-direction: column;
     align-items: center;
 }
+.controlPass {
+    display: flex;
+    align-items: center;
+}
+.controlPassVisible {
+    cursor: pointer;
+}
