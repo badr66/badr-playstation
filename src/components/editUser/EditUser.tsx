@@ -7,20 +7,15 @@ import { useRouter } from "next/navigation";
 import TimedNotification from "../TimedNotification/TimedNotification";
 import { useUser } from "@/context/userContext";
 import { editUser } from "@/databaseFunctions/users/editUser";
-import { getUserInfo } from "@/databaseFunctions/users/getUserInfo";
 
-export default async function EditUser({name}: {name: string}) {
+export default function EditUser({name, password}: {name: string, password: string}) {
     const {setUser} = useUser();
     const [visible, setVisible] = useState<boolean>(false);
     const [newName, setNewName] = useState<string>(name);
-    const [newPassword, setNewPassword] = useState<string>("");
+    const [newPassword, setNewPassword] = useState<string>(password);
     const [showPass, setShowPass] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
     const router = useRouter();
-    const callApi = await getUserInfo(name);
-    if(callApi.password) {
-        setNewPassword(callApi.password)
-    }
     const modalBody = <div className={styles.modalBody}>
         <TextInput placeholder="الاســــم" setValue={setNewName} type="text" value={newName} />
         <div className={styles.controlPass}>
