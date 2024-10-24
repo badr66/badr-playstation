@@ -40,3 +40,14 @@ a {
     color-scheme: dark;
   }
 }
+@media screen and ( max-width: 767px) {
+  p {
+    font-size: 0.8rem;
+  }
+  h2 {
+    font-size: 1rem;
+  }
+  h1 {
+    font-size: 1.2rem;
+  }
+}

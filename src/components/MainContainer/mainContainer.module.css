@@ -117,4 +117,14 @@
     .toggleContent {
         grid-template-columns: 1fr 0fr;
     }
+    .brand h2 {
+        font-size: 1rem;
+    }
+    .brand img {
+        width: 30px;
+        height: 30px;
+    }
+    .sidebarHeader p {
+        font-size: 1rem;
+    }
 }
