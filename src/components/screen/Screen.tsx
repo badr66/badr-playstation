@@ -114,10 +114,10 @@ export default function Screen({screen}: {screen: ScreenType}) {
                     <span className={styles.cost}>{`${calculateCost()} ل.س`}</span>
                 </div>
                 {
-                error !== "" && <TimedNotification bg="rgba(0,0,0,0.3)" color="red" duration={5000} notification={error} />
+                error !== "" && <TimedNotification bg="rgb(255,255,255)" color="red" duration={5000} notification={error} />
             }
             {
-                message !== "" && <TimedNotification bg="rgba(0,0,0,0.3)" color="green" duration={5000} notification={message} />
+                message !== "" && <TimedNotification bg="rgb(255,255,255)" color="green" duration={5000} notification={message} />
             }
             </div>
             {

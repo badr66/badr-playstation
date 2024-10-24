@@ -38,12 +38,16 @@ export default function EditUser({name}: {name: string}) {
                 const callApi = await editUser(body);
                 if(callApi.error) {
                     setVisible(false);
+                    setNewName(name);
+                    setNewPassword("");
                     setError(callApi.error);
                 }
                 else if(callApi.name) {
                     setVisible(false);
                     setError("");
                     setUser({name: callApi.name});
+                    setNewName(name);
+                    setNewPassword("");
                     router.refresh();
     
                 }
@@ -63,7 +67,7 @@ export default function EditUser({name}: {name: string}) {
                     onOk={onOk}
                     headerBg="cyan"/>
                     {
-                        error !== "" && <TimedNotification bg="rgba(0,0,0,0.3)" color="red" duration={5000} notification={error} />
+                        error !== "" && <TimedNotification bg="rgb(255,255,255)" color="red" duration={5000} notification={error} />
                     }
         </>
 
