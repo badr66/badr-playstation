@@ -8,18 +8,18 @@ import TimedNotification from "../TimedNotification/TimedNotification";
 import { useUser } from "@/context/userContext";
 import { editUser } from "@/databaseFunctions/users/editUser";
 
-export default function EditUser({name, password}: {name: string, password: string}) {
+export default function EditUser({name}: {name: string}) {
     const {setUser} = useUser();
     const [visible, setVisible] = useState<boolean>(false);
     const [newName, setNewName] = useState<string>(name);
-    const [newPassword, setNewPassword] = useState<string>(password);
+    const [newPassword, setNewPassword] = useState<string>("");
     const [showPass, setShowPass] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
     const router = useRouter();
     const modalBody = <div className={styles.modalBody}>
-        <TextInput placeholder="الاســــم" setValue={setNewName} type="text" value={newName} />
+        <TextInput placeholder=" الاســـم الجديد" setValue={setNewName} type="text" value={newName} />
         <div className={styles.controlPass}>
-            <TextInput placeholder="كلمـــة الـمرور" setValue={setNewPassword} type={showPass ? "text" : "password"} value={newPassword} />
+            <TextInput placeholder="كلمــة المـرور الجديـدة" setValue={setNewPassword} type={showPass ? "text" : "password"} value={newPassword} />
             <div className={styles.controlPassVisible} onClick={ () => setShowPass(!showPass) }>
                 <Image src={showPass ? "/images/account/hide.ico" : "/images/account/show.ico"} alt="" width={25} height={25} />
             </div>

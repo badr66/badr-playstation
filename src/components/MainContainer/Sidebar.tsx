@@ -5,25 +5,9 @@ import AddScreen from "../screen/AddScreen";
 import Logout from "../logout/Logout";
 import EditUser from "../editUser/EditUser";
 import { useUser } from "@/context/userContext";
-import { getUserInfo } from "@/databaseFunctions/users/getUserInfo";
-import { useEffect } from "react";
 
 export default function Sidebar() {
     const {user} = useUser();
-    let password = "";
-    useEffect(() => {
-        const fetchUserInfo = async () => {  
-            if (user) {  
-                const callApi = await getUserInfo(user.name);  
-                if (callApi.password) {  
-                    password = callApi.password;  
-                }  
-            }  
-        };  
-    
-        fetchUserInfo(); 
-    },[user])
-
     return(
         <div className={styles.sidebar}>
             <div className={styles.sidebarHeader}>
@@ -33,7 +17,7 @@ export default function Sidebar() {
             {
                 user && <>
                     <AddScreen />
-                    <EditUser name = {user.name} password = {password}/>
+                    <EditUser name = {user.name}/>
                     <Logout />
                 </>
             }
