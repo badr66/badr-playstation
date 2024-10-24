@@ -16,7 +16,8 @@ export default function Screen({screen}: {screen: ScreenType}) {
     const router = useRouter();
     const {user} = useUser();
     const [start, setStart] = useState<boolean>(false);
-    const [startTime, setStartTime] = useState<number>(0);  
+    const [startTime, setStartTime] = useState<number>(0); 
+    const [animationFrameId, setAnimationFrameId] = useState<number | null>(null);  
     const [seconds, setSeconds] = useState<number>(0);
     const [showOptions, setShowOptions] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
@@ -36,20 +37,22 @@ export default function Screen({screen}: {screen: ScreenType}) {
     setName={setName} 
     setCost={setCost}/>
     useEffect(() => {
-        let interval = null;
         if(start){
             setStartTime(Date.now() - seconds * 1000);
-            interval= setInterval(() => {
-                const elapsedTime = Math.floor((Date.now() - startTime) / 1000); 
-                setSeconds(elapsedTime);
-            }, 1000);
+            const updateSeconds = () => {  
+                const elapsedTime = Math.floor((Date.now() - startTime) / 1000);  
+                setSeconds(elapsedTime);  
+                setAnimationFrameId(requestAnimationFrame(updateSeconds));  
+            }; 
+            updateSeconds(); 
         } else {
-            if(interval)
-            clearInterval(interval);
+            if (animationFrameId) {  
+                cancelAnimationFrame(animationFrameId);  
+            }  
         }
         return () => {  
-            if (interval) {  
-            clearInterval(interval);  
+            if (animationFrameId) {  
+                cancelAnimationFrame(animationFrameId);  
             }  
         };
     }, [start, startTime]);
