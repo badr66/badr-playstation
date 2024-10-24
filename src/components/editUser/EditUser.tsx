@@ -46,7 +46,7 @@ export default function EditUser({name}: {name: string}) {
                     setVisible(false);
                     setError("");
                     setUser({name: callApi.name});
-                    setNewName(name);
+                    setNewName(callApi.name);
                     setNewPassword("");
                     router.refresh();
     
