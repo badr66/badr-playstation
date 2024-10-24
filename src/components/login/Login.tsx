@@ -27,9 +27,9 @@ export default function Login() {
                 setLoading(false);
                 setError(callApi.error);
             }
-            else {
+            else if(callApi.name) {
                 setLoading(false);
-                setUser({id: callApi.id, name: callApi.name, password: callApi.password});
+                setUser({name: callApi.name});
                 router.push("/");
             }
         }

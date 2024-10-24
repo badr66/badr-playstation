@@ -1,4 +1,3 @@
-"use client"
 import styles from "./editUser.module.css";
 import TextInput from "../textInput/TextInput";
 import { useState } from "react";
@@ -8,32 +7,36 @@ import { useRouter } from "next/navigation";
 import TimedNotification from "../TimedNotification/TimedNotification";
 import { useUser } from "@/context/userContext";
 import { editUser } from "@/databaseFunctions/users/editUser";
+import { getUserInfo } from "@/databaseFunctions/users/getUserInfo";
 
-export default function EditUser() {
-    const {user, setUser} = useUser();
+export default async function EditUser({name}: {name: string}) {
+    const {setUser} = useUser();
     const [visible, setVisible] = useState<boolean>(false);
-    const [name, setName] = useState<string>(user ? user.name : "");
-    const [password, setPassword] = useState<string>(user ? user.password : "");
+    const [newName, setNewName] = useState<string>(name);
+    const [newPassword, setNewPassword] = useState<string>("");
     const [showPass, setShowPass] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
     const router = useRouter();
+    const callApi = await getUserInfo(name);
+    if(callApi.password) {
+        setNewPassword(callApi.password)
+    }
     const modalBody = <div className={styles.modalBody}>
-        <TextInput placeholder="الاســــم" setValue={setName} type="text" value={name} />
+        <TextInput placeholder="الاســــم" setValue={setNewName} type="text" value={newName} />
         <div className={styles.controlPass}>
-            <TextInput placeholder="كلمـــة الـمرور" setValue={setPassword} type={showPass ? "text" : "password"} value={password} />
+            <TextInput placeholder="كلمـــة الـمرور" setValue={setNewPassword} type={showPass ? "text" : "password"} value={newPassword} />
             <div className={styles.controlPassVisible} onClick={ () => setShowPass(!showPass) }>
                 <Image src={showPass ? "/images/account/hide.ico" : "/images/account/show.ico"} alt="" width={25} height={25} />
             </div>
         </div>
     </div>
     const onOk = async() => {
-        if(user) {
             const body = {
-                name,
-                password,
-                id: user.id,
+                newName,
+                newPassword,
+                id: name,
             };
-            if(name === "" || password === "") {
+            if(newName === "" || newPassword === "") {
                 setError("الرجــاء إدخال الاســم وكلمة المرور");
             }
             else {
@@ -42,21 +45,17 @@ export default function EditUser() {
                     setVisible(false);
                     setError(callApi.error);
                 }
-                else {
+                else if(callApi.name) {
                     setVisible(false);
                     setError("");
-                    setUser({id:  callApi.id, name: callApi.name, password: callApi.password});
+                    setUser({name: callApi.name});
                     router.refresh();
     
                 }
             }
-        }
     }
     return(
         <>  
-        {
-            user && (
-                <>
                     <div className={styles.editUser} onClick={()=>{setVisible(true)}}>
                         <p> تعديل الحســاب</p>
                         <Image src="/images/account/edit.ico" alt="" width={20} height={20} />
@@ -71,9 +70,6 @@ export default function EditUser() {
                     {
                         error !== "" && <TimedNotification bg="rgba(0,0,0,0.3)" color="red" duration={5000} notification={error} />
                     }
-                </>
-            )
-        }
         </>
 
     );
