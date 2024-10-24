@@ -16,7 +16,6 @@ export default function Screen({screen}: {screen: ScreenType}) {
     const router = useRouter();
     const {user} = useUser();
     const [start, setStart] = useState<boolean>(false);
-    const [startTime, setStartTime] = useState<number>(0); 
     const [animationFrameId, setAnimationFrameId] = useState<number | null>(null);  
     const [seconds, setSeconds] = useState<number>(0);
     const [showOptions, setShowOptions] = useState<boolean>(false);
@@ -36,26 +35,26 @@ export default function Screen({screen}: {screen: ScreenType}) {
     setNumber={setNumber} 
     setName={setName} 
     setCost={setCost}/>
-    useEffect(() => {
-        if(start){
-            setStartTime(Date.now() - seconds * 1000);
+    useEffect(() => {  
+        if (start) {  
             const updateSeconds = () => {  
-                const elapsedTime = Math.floor((Date.now() - startTime) / 1000);  
-                setSeconds(elapsedTime);  
+                setSeconds(prevSeconds => prevSeconds + 1);  
                 setAnimationFrameId(requestAnimationFrame(updateSeconds));  
-            }; 
-            updateSeconds(); 
-        } else {
+            };  
+
+            updateSeconds();  
+        } else {  
             if (animationFrameId) {  
                 cancelAnimationFrame(animationFrameId);  
             }  
-        }
+        }  
+
         return () => {  
             if (animationFrameId) {  
                 cancelAnimationFrame(animationFrameId);  
             }  
-        };
-    }, [start, startTime]);
+        };  
+    }, [start]);
     const formattedTime = new Date(seconds *1000).toISOString().slice(11,19);
     const calculateCost = () => {
         const hours = seconds /3600;
