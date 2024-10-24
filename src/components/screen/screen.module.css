@@ -54,14 +54,14 @@
 }
 .screenCtrl {
     position: absolute;
-    top: -0.5rem;
-    right: -0.5rem;
+    top: 0;
+    right: 0;
     cursor: pointer;
 }
 .options {
     position: absolute;
     top: 0;
-    right: 2rem;
+    right: 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;

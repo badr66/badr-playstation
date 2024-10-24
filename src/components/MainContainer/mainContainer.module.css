@@ -73,7 +73,6 @@
     color: rgb(117, 34, 4);
 }
 .name {
-    font-size: 1.2rem;
     color: rgb(218, 42, 150);
     font-weight: bolder;
 }
@@ -115,9 +114,6 @@
 @media screen and ( max-width: 767px) {
     .toggleContent {
         grid-template-columns: 1fr 0fr;
-    }
-    .brand h2 {
-        font-size: 1rem;
     }
     .brand img {
         width: 30px;

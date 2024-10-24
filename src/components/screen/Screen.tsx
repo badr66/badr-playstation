@@ -132,7 +132,7 @@ export default function Screen({screen}: {screen: ScreenType}) {
             {
                 user && 
                 <div className={styles.screenCtrl} onClick={()=>{setShowOptions(!showOptions)}}>
-                    <Image src="/images/control/screenCtrl.ico" alt="خيارات" width={40} height={40} />
+                    <Image src="/images/control/screenCtrl.ico" alt="خيارات" width={30} height={30} />
                 </div>
             }
             <div className={`${styles.options} ${showOptions ? styles.show : styles.hide}`}>
