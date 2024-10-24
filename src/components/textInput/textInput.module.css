@@ -14,7 +14,7 @@
 .labelElement {  
     position: absolute;  
     top: 0;  
-    left: 0;  
+    right: 0;  
     pointer-events: none; 
     color: #95b5e6;  
     transition: 0.2s ease all;
@@ -23,7 +23,7 @@
 .inputElement:focus + label,  
 .inputElement:not(:placeholder-shown) + label {  
     top: -1rem;  
-    left: 0;  
+    right: 0;  
     font-size: 0.8rem; 
     color: rgb(42, 87, 87); 
 }  
