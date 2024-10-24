@@ -16,6 +16,7 @@ export default function Screen({screen}: {screen: ScreenType}) {
     const router = useRouter();
     const {user} = useUser();
     const [start, setStart] = useState<boolean>(false);
+    const [startTime, setStartTime] = useState<number>(0);  
     const [seconds, setSeconds] = useState<number>(0);
     const [showOptions, setShowOptions] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
@@ -37,8 +38,10 @@ export default function Screen({screen}: {screen: ScreenType}) {
     useEffect(() => {
         let interval = null;
         if(start){
+            setStartTime(Date.now() - seconds * 1000);
             interval= setInterval(() => {
-                setSeconds((sec:number) => sec+1);
+                const elapsedTime = Math.floor((Date.now() - startTime) / 1000); 
+                setSeconds(elapsedTime);
             }, 1000);
         } else {
             if(interval)
@@ -49,7 +52,7 @@ export default function Screen({screen}: {screen: ScreenType}) {
             clearInterval(interval);  
             }  
         };
-    }, [start, seconds]);
+    }, [start, startTime]);
     const formattedTime = new Date(seconds *1000).toISOString().slice(11,19);
     const calculateCost = () => {
         const hours = seconds /3600;
