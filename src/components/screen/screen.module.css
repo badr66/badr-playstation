@@ -7,7 +7,6 @@
     position: relative;
 }
 .screenDetail {
-    font-size: 1.4rem;
     font-weight: bolder;
     color: rgb(95, 63, 5);
 }
@@ -25,11 +24,10 @@
     gap: 1rem;
 }
 .time {
-    font-size: 1.1rem;
     color: rgb(35, 122, 122);
 }
 .cost {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bolder;
     color: rgb(5, 92, 12);
 }
@@ -47,7 +45,6 @@
     cursor: pointer;
 }
 .addScreen p {
-    font-size: 1.1rem;
     font-weight: bolder;
 }
 .modalBody {
