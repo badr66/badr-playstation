@@ -17,17 +17,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         const storedUser = localStorage.getItem('user');  
         if (storedUser) {  
             setUser(JSON.parse(storedUser));  
-        } 
-        const handleBeforeUnload = () => {  
-            localStorage.removeItem('user'); 
-            setUser(null); 
-            document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; // حذف الكوكيز  
-        };  
-
-        window.addEventListener('beforeunload', handleBeforeUnload);  
-        return () => {  
-            window.removeEventListener('beforeunload', handleBeforeUnload);  
-        };  
+        }  
     }, []);  
  
     useEffect(() => {  
