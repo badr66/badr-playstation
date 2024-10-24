@@ -12,6 +12,7 @@ export default function Login() {
     const {setUser} = useUser();
     const [name, setName] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [showPass, setShowPass] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
     const submitHandle = async (e: FormEvent<HTMLFormElement>) => {
@@ -46,7 +47,12 @@ export default function Login() {
                 </div>
                 <form className={styles.loginForm} onSubmit={submitHandle}>
                     <TextInput type="text" placeholder="الاســــم" setValue={setName} />
-                    <TextInput type="password" placeholder="كلمــة المرور" setValue={setPassword} />
+                    <div className={styles.controlPass}>
+                        <TextInput type={showPass ? "text" : "password"} placeholder="كلمــة المرور" setValue={setPassword} />
+                        <div className={styles.controlPassVisible} onClick={ () => setShowPass(!showPass) }>
+                            <Image src={showPass ? "/images/account/hide.ico" : "/images/account/show.ico"} alt="" width={25} height={25} />
+                        </div>
+                    </div>
                     <button type="submit" className={styles.submit}>{loading ? "جــاري المعالجــة" : "الـدخــــول"}</button>
                     <p className={styles.error}>{error}</p>
                 </form>
