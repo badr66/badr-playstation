@@ -108,10 +108,11 @@ export default function Screen({screen}: {screen: ScreenType}) {
                 <div className={styles.screen}>
             <p className={styles.screenDetail}>{`${screen.name && screen.name !== null ? screen.name : "شاشــــة رقــم"}(${screen.number})`}</p>
             <div className={styles.screenImg}>
-                <Image src="/images/control/screen.ico" alt="شاشة" width={300} height={300} />
+                <Image src="/images/control/screen.ico" alt="شاشة" width={200} height={200} />
                 <div className={styles.timer}>
                     <span className={styles.time}>{formattedTime}</span>
-                    <span className={styles.cost}>{`${calculateCost()} ل.س`}</span>
+                    <span className={styles.cost}>{calculateCost()}</span>
+                    <span className={styles.cost}>ل.س</span>
                 </div>
                 {
                 error !== "" && <TimedNotification bg="rgb(255,255,255)" color="red" duration={5000} notification={error} />
