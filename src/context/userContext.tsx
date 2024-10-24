@@ -18,7 +18,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         if (storedUser) {  
             setUser(JSON.parse(storedUser));  
         }  
-    }, []);  
+    });  
  
     useEffect(() => {  
         if (user) {  
