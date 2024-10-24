@@ -15,7 +15,6 @@ export async function POST(request: NextRequest) {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "development",
                 path: "/",
-                maxAge: 0,
             });
             return NextResponse.json({name: checkUserQuery.rows[0].name});
         }

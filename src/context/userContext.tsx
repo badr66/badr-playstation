@@ -21,6 +21,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         const handleBeforeUnload = () => {  
             localStorage.removeItem('user'); 
             setUser(null); 
+            document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; // حذف الكوكيز  
         };  
 
         window.addEventListener('beforeunload', handleBeforeUnload);  
