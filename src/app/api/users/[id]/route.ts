@@ -37,6 +37,7 @@ export async function PATCH(request: NextRequest, {params}: {params: {id: string
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "development",
                 path: "/",
+                maxAge: 0,
             });
             return NextResponse.json({name: updateUserQuery.rows[0].name});
         }

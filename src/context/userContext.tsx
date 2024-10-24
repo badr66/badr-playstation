@@ -24,8 +24,6 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         };  
 
         window.addEventListener('beforeunload', handleBeforeUnload);  
-        
-        // تنظيف الحدث عند فك التركيب  
         return () => {  
             window.removeEventListener('beforeunload', handleBeforeUnload);  
         };  
