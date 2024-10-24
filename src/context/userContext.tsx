@@ -17,7 +17,18 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         const storedUser = localStorage.getItem('user');  
         if (storedUser) {  
             setUser(JSON.parse(storedUser));  
-        }  
+        } 
+        const handleBeforeUnload = () => {  
+            localStorage.removeItem('user'); 
+            setUser(null); 
+        };  
+
+        window.addEventListener('beforeunload', handleBeforeUnload);  
+        
+        // تنظيف الحدث عند فك التركيب  
+        return () => {  
+            window.removeEventListener('beforeunload', handleBeforeUnload);  
+        };  
     }, []);  
  
     useEffect(() => {  
