@@ -18,7 +18,6 @@ export default function Screen({screen}: {screen: ScreenType}) {
     const [start, setStart] = useState<boolean>(false);
     const [startTime, setStartTime] = useState<number>(0); 
     const [pause, setPause] = useState<boolean>(false);
-    const [animationFrameId, setAnimationFrameId] = useState<number | null>(null);  
     const [seconds, setSeconds] = useState<number>(0);
     const [showOptions, setShowOptions] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
