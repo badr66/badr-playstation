@@ -1,5 +1,4 @@
 import { sql } from "@vercel/postgres";
-import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest, {params}: {params: {id: string}}) {
@@ -22,7 +21,6 @@ export async function POST(request: NextRequest, {params}: {params: {id: string}
 
 export async function PATCH(request: NextRequest, {params}: {params: {id: string}}) {
     const {name, password} = await request.json();
-    const cookiesStore = cookies();
     try {
         const updateUserQuery = await sql `
         UPDATE users 
