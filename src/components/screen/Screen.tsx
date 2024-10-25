@@ -37,26 +37,26 @@ export default function Screen({screen}: {screen: ScreenType}) {
     setNumber={setNumber} 
     setName={setName} 
     setCost={setCost}/>
-    useEffect(() => {
-        if(start){
-            setStartTime(Date.now() - seconds * 1000);
-            const updateSeconds = () => {  
-                const elapsedTime = Math.floor((Date.now() - startTime) / 1000);  
-                setSeconds(elapsedTime);  
-                setAnimationFrameId(requestAnimationFrame(updateSeconds));  
-            }; 
-            updateSeconds(); 
-        } else {
-            if (animationFrameId) {  
-                cancelAnimationFrame(animationFrameId);  
+    useEffect(() => {  
+        let interval: NodeJS.Timeout | null = null;  
+
+        if (start) {  
+            setStartTime(Date.now() - seconds * 1000); // لتحسين الوقت المنقضي  
+            interval = setInterval(() => {  
+                setSeconds(Math.floor((Date.now() - startTime) / 1000));  
+            }, 1000);  
+        } else {  
+            if (interval) {  
+                clearInterval(interval);  
             }  
-        }
+        }  
+
         return () => {  
-            if (animationFrameId) {  
-                cancelAnimationFrame(animationFrameId);  
+            if (interval) {  
+                clearInterval(interval);  
             }  
-        };
-    }, [start]);
+        };  
+    }, [start, startTime, seconds]);
     const formatTime = (totalSeconds:number) => {  
         const hours = Math.floor(totalSeconds / 3600);  
         const minutes = Math.floor((totalSeconds % 3600) / 60);  
