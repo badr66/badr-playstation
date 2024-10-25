@@ -13,19 +13,29 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
  
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {  
     const [user, setUser] = useState<UserType | null>(null);  
-    useEffect(() => {   
-        const storedUser = localStorage.getItem('user');  
-        if (storedUser) {  
-            setUser(JSON.parse(storedUser));  
-        }  
+    useEffect(() => {  
+        const cookies = document.cookie.split('; ');  
+        const tokenCookie = cookies.find(cookie => cookie.startsWith('token='));  
+
+        if (tokenCookie) {  
+            const storedUser = localStorage.getItem('user');  
+            if (storedUser) {  
+                setUser(JSON.parse(storedUser));  
+            } 
+        }   
     }, []);  
  
-    useEffect(() => {  
-        if (user) {  
-            localStorage.setItem('user', JSON.stringify(user));  
-        } else {  
-            localStorage.removeItem('user'); 
-        }  
+    useEffect(() => { 
+        const cookies = document.cookie.split('; ');  
+        const tokenCookie = cookies.find(cookie => cookie.startsWith('token='));  
+
+        if (tokenCookie) {  
+            if (user) {  
+                localStorage.setItem('user', JSON.stringify(user));  
+            } else {  
+                localStorage.removeItem('user'); 
+            }  
+        }   
     }, [user]); 
 
     return (  

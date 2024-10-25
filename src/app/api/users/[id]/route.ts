@@ -33,13 +33,14 @@ export async function PATCH(request: NextRequest, {params}: {params: {id: string
         `;
         if(updateUserQuery.rows.length > 0) {
             const token = `${name}!!/${password}:##34@`;
-            cookiesStore.set("token", token, {
+            const response = NextResponse.json({name: updateUserQuery.rows[0].name});
+            response.cookies.set("token", token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "development",
                 path: "/",
-                maxAge: 60 * 60 * 24,
+                maxAge: 60,
             });
-            return NextResponse.json({name: updateUserQuery.rows[0].name});
+            return response;
         }
         else return NextResponse.json({error: "حدث خطأ في التعديل! حاول مجددا"})
     } catch(error) {
