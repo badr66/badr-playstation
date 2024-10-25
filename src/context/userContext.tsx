@@ -15,8 +15,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [user, setUser] = useState<UserType | null>(null);  
     useEffect(() => {  
         const cookies = document.cookie.split('; '); 
-        const tokenCookie = cookies.find(cookie => cookie.startsWith('token='));   
-        console.log(tokenCookie);  
+        const tokenCookie = cookies.find(cookie => cookie.startsWith('token='));    
         if (tokenCookie) {  
             const storedUser = localStorage.getItem('user');  
             if (storedUser) {  
@@ -27,8 +26,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
  
     useEffect(() => { 
         const cookies = document.cookie.split('; '); 
-        const tokenCookie = cookies.find(cookie => cookie.startsWith('token='));   
-        console.log(tokenCookie);  
+        const tokenCookie = cookies.find(cookie => cookie.startsWith('token='));    
         if (tokenCookie) {  
             if (user) {  
                 localStorage.setItem('user', JSON.stringify(user));  
