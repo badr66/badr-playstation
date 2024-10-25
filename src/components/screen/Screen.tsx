@@ -17,6 +17,7 @@ export default function Screen({screen}: {screen: ScreenType}) {
     const {user} = useUser();
     const [start, setStart] = useState<boolean>(false);
     const [startTime, setStartTime] = useState<number>(0); 
+    const [pause, setPause] = useState<boolean>(false);
     const [animationFrameId, setAnimationFrameId] = useState<number | null>(null);  
     const [seconds, setSeconds] = useState<number>(0);
     const [showOptions, setShowOptions] = useState<boolean>(false);
@@ -55,7 +56,7 @@ export default function Screen({screen}: {screen: ScreenType}) {
                 cancelAnimationFrame(animationFrameId);  
             }  
         };
-    }, [start, startTime]);
+    }, [start]);
     const formatTime = (totalSeconds:number) => {  
         const hours = Math.floor(totalSeconds / 3600);  
         const minutes = Math.floor((totalSeconds % 3600) / 60);  
@@ -141,9 +142,14 @@ export default function Screen({screen}: {screen: ScreenType}) {
             {
                 user && 
                 <div className={styles.buttons}>
-                    <CustomerButton title={start?"إيقـاف مؤقـت":"بــدء"} bg={start?"gray":"green"} color="white" start={start} setStart={setStart}/>
                     {
-                        seconds !== 0 && <CustomerButton title="إلغـــاء" bg="red" color="white" start={start} setStart={setStart} setSeconds={setSeconds}/>
+                        !start && !pause ? <CustomerButton title="بــدء" bg="green" color="white" start={start} setStart={setStart} pause={pause} setPause={setPause}/> : null
+                    }
+                                        {
+                        start && pause ? <CustomerButton title="إيقـــاف" bg="rgb(11, 53, 53)" color="white" start={start} setStart={setStart} pause={pause} setPause={setPause}/> : null
+                    }
+                    {
+                        seconds !== 0 && <CustomerButton title="إلغـــاء" bg="red" color="white" start={start} setStart={setStart} setSeconds={setSeconds} pause={pause} setPause={setPause}/>
                     }
                </div>
             }
