@@ -59,7 +59,7 @@ export default function Screen({screen}: {screen: ScreenType}) {
                 cancelAnimationFrame(animationFrameId);  
             }  
         };  
-    }, [start]);
+    }, [start,startTime]);
     const formatTime = (totalSeconds:number) => {  
         const hours = Math.floor(totalSeconds / 3600);  
         const minutes = Math.floor((totalSeconds % 3600) / 60);  
