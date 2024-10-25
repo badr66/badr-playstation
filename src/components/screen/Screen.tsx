@@ -16,10 +16,8 @@ export default function Screen({screen}: {screen: ScreenType}) {
     const router = useRouter();
     const {user} = useUser();
     const [start, setStart] = useState<boolean>(false);
-    const [startTime, setStartTime] = useState<number>(0); 
     const [pause, setPause] = useState<boolean>(false);
     const [seconds, setSeconds] = useState<number>(0);
-    const [animationFrameId, setAnimationFrameId] = useState<number | null>(null); 
     const [showOptions, setShowOptions] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
     const [message, setMessage] = useState<string>("");
@@ -38,28 +36,32 @@ export default function Screen({screen}: {screen: ScreenType}) {
     setName={setName} 
     setCost={setCost}/>
     useEffect(() => {  
-        if (start) {  
-            setStartTime(Date.now() - seconds * 1000);  
-
-            const updateSeconds = () => {  
-                const elapsedTime = Math.floor((Date.now() - startTime) / 1000);  
-                setSeconds(elapsedTime);  
-                setAnimationFrameId(requestAnimationFrame(updateSeconds));  
-            };  
-
-            updateSeconds();  
-        } else {  
-            if (animationFrameId) {  
-                cancelAnimationFrame(animationFrameId);  
-            }  
-        }  
-
-        return () => {  
-            if (animationFrameId) {  
-                cancelAnimationFrame(animationFrameId);  
+        let interval: NodeJS.Timeout | null = null;  
+        let startTime: number | null = null;  
+    
+        const updateSeconds = () => {  
+            if (startTime !== null) {  
+                const currentTime = Date.now();  
+                setSeconds(Math.floor((currentTime - startTime) / 1000));  
             }  
         };  
-    }, [start,startTime]);
+    
+        if (start) {  
+            startTime = Date.now() - seconds * 1000; // لتحسين الوقت المنقضي  
+            interval = setInterval(updateSeconds, 1000);  
+        } else {  
+            if (interval) {  
+                clearInterval(interval);  
+            }  
+        }  
+    
+        // تحديث الوقت عند تغيير حالة البدء  
+        return () => {  
+            if (interval) {  
+                clearInterval(interval);  
+            }  
+        };  
+    }, [start, seconds]); 
     const formatTime = (totalSeconds:number) => {  
         const hours = Math.floor(totalSeconds / 3600);  
         const minutes = Math.floor((totalSeconds % 3600) / 60);  
