@@ -33,7 +33,7 @@ export async function PATCH(request: NextRequest, {params}: {params: {id: string
             const token = `${name}!!/${password}:##34@`;
             const response = NextResponse.json({name: updateUserQuery.rows[0].name});
             response.cookies.set("token", token, {
-                httpOnly: true,
+                httpOnly: false,
                 secure: process.env.NODE_ENV === "development",
                 path: "/",
                 maxAge: 60 * 60,

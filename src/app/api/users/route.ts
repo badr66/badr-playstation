@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
             const token = `${name}!!/${password}:##34@`;
             const response = NextResponse.json({name: checkUserQuery.rows[0].name});
             response.cookies.set("token", token, {
-                httpOnly: true,
+                httpOnly: false,
                 secure: process.env.NODE_ENV === "development",
                 path: "/",
                 maxAge: 60 * 60,
