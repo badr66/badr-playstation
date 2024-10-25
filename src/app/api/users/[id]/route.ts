@@ -36,7 +36,7 @@ export async function PATCH(request: NextRequest, {params}: {params: {id: string
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "development",
                 path: "/",
-                maxAge: 60,
+                maxAge: 60 * 60,
             });
             return response;
         }
