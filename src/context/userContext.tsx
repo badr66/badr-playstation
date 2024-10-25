@@ -15,7 +15,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [user, setUser] = useState<UserType | null>(null);  
     useEffect(() => {  
         const cookies = document.cookie.split('; ');   
-
+        console.log(cookies);  
         if (cookies.length > 0) {  
             const storedUser = localStorage.getItem('user');  
             if (storedUser) {  
@@ -25,7 +25,8 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }, []);  
  
     useEffect(() => { 
-        const cookies = document.cookie.split('; ');    
+        const cookies = document.cookie.split('; ');  
+        console.log(cookies);  
 
         if (cookies.length >0) {  
             if (user) {  
