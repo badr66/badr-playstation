@@ -14,9 +14,9 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {  
     const [user, setUser] = useState<UserType | null>(null);  
     useEffect(() => {  
-        const cookies = document.cookie.split('; ');   
+        const cookies = document.cookie;   
         console.log(cookies);  
-        if (cookies.length > 0) {  
+        if (cookies) {  
             const storedUser = localStorage.getItem('user');  
             if (storedUser) {  
                 setUser(JSON.parse(storedUser));  
@@ -25,10 +25,10 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }, []);  
  
     useEffect(() => { 
-        const cookies = document.cookie.split('; ');  
+        const cookies = document.cookie;  
         console.log(cookies);  
 
-        if (cookies.length >0) {  
+        if (cookies) {  
             if (user) {  
                 localStorage.setItem('user', JSON.stringify(user));  
             } else {  
